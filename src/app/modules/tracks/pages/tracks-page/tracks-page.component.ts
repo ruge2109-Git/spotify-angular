@@ -27,20 +27,9 @@ export class TracksPageComponent implements OnInit, OnDestroy {
     this.listObserver$.forEach(e => e.unsubscribe());
   }
 
-  initTracks() {
-    const observer1$ = this._trackService.dataTracksTrending$.subscribe(
-      (data: TrackModel[]) => {
-        console.log("Obteniendo data trendings");
-        this.tracksTrending = data;
-      }
-    )
-    const observer2$ = this._trackService.dataTracksRandom$.subscribe(
-      (data: TrackModel[]) => {
-        console.log("Obteniendo data random");
-        this.tracksRandom = [...this.tracksRandom,...data];
-      }
-    )
-    this.listObserver$ = [observer1$, observer2$];
+  async initTracks() {
+    this.tracksTrending = await this._trackService.getAllTracks$().toPromise();
+    this.tracksRandom = await this._trackService.getAllRandom$().toPromise();
   }
 
 }

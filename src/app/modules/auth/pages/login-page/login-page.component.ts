@@ -31,7 +31,17 @@ export class LoginPageComponent implements OnInit {
 
   sendLogin() {
     const { email, password } = this.formLogin.value;
-    this._authService.sendCredentials(email, password);
+    this._authService.sendCredentials(email, password).subscribe(
+      (data) => {
+        console.log("Correcto",data);
+        
+      },
+      (err) => {
+        this.errorSession = true;
+        console.log(err);
+        
+      }
+    )
   }
 
 }
