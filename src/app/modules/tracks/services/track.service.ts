@@ -13,9 +13,6 @@ export class TrackService {
 
   private readonly url = environment.url;
 
-  // dataTracksTrending$: Observable<TrackModel[]> = of([]);
-  // dataTracksRandom$: Observable<TrackModel[]> = of([]);
-
   constructor(private _http: HttpClient) {
 
   }
